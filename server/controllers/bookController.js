@@ -6,10 +6,11 @@ export async function getAllBooks(req, res) {
     const { yearFrom, yearTo, inStock, sortByRating } = req.query;
 
     const filter = {};
+
     if (yearFrom && yearTo) {
       filter.publishDate = {
-        $gte: new Date(`${yearFrom}-01-01`),
-        $lte: new Date(`${yearTo}-12-31`)
+        $gte: `${yearFrom}-01-01`,
+        $lte: `${yearTo}-12-31`,
       };
     }
 
@@ -24,6 +25,7 @@ export async function getAllBooks(req, res) {
     const books = await collection.find(filter).sort(sort).toArray();
     res.json(books);
   } catch (err) {
+    console.error('getAllBooks error:', err);
     res.status(500).json({ error: 'Server error' });
   }
 }
@@ -34,10 +36,12 @@ export async function getBookById(req, res) {
     const collection = db.collection('books');
 
     const book = await collection.findOne({ _id: req.params.id });
+
     if (!book) return res.status(404).json({ error: 'Book not found' });
 
     res.json(book);
   } catch (err) {
+    console.error('getBookById error:', err);
     res.status(500).json({ error: 'Server error' });
   }
 }

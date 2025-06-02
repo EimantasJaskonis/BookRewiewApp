@@ -1,4 +1,4 @@
-import { useParams } from 'react-router';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -44,6 +44,7 @@ const BookDetails = () => {
 
 export default BookDetails;
 
+// Styled Components
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;

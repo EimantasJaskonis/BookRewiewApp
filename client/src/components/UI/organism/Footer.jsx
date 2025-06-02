@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const Footer = () => {
     return (
       <FooterWrapper>
-      <p>© 2025 | Privacy Policy | Terms & Conditions</p>
+       <p>&copy; {new Date().getFullYear()} Book Library. All rights reserved. Seirijų g. 2, Alytus, Lithuania</p>
       <LinkGroup>
         <Link to="/cookies">Cookies</Link>
         <Link to="/privacy">Privacy Policy</Link>
@@ -33,4 +33,12 @@ const Footer = () => {
   justify-content: center; 
   display: flex;
   gap: 0.5rem;
+`;
+
+const StyledFooter = styled.footer`
+  margin-top: auto;
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
 `;

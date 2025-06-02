@@ -1,73 +1,75 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom'; 
 
-const AllBooks = () => {
-  const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('http://localhost:5500/api/books')
-      .then((res) => res.json())
-      .then((data) => {
-        setBooks(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error('Error:', err);
-        setLoading(false);
-      });
-  }, []);
-
-  if (loading) return <p>Loading...</p>;
-
-  return (
-    <BooksGrid>
-      {books.map((book) => (
-        <BookCard key={book._id}>
-          <Cover src={book.imageUrl} alt={book.title} />
-          <Title>{book.title}</Title>
-          <Author>{book.author}</Author>
-          <p>{book.genres?.join(', ')}</p>
-          <Rating>{book.rating}</Rating>
-        </BookCard>
-      ))}
-    </BooksGrid>
-  );
-};
-
-export default AllBooks;
-
-const BooksGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 2rem;
+const AllBooksWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
   padding: 2rem;
 `;
 
 const BookCard = styled.div`
-  background: #f4f4f4;
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
   padding: 1rem;
-  border-radius: 1rem;
-  text-align: center;
+  background: #a59f9f;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
-const Cover = styled.img`
+const BookImage = styled.img`
   width: 100%;
-  height: 250px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 0.5rem;
 `;
 
-const Title = styled.h3`
-  margin: 0.5rem 0 0.25rem;
+const ReadMoreButton = styled(Link)` 
+  margin-top: auto;
+  padding: 0.5rem 1rem;
+  background-color: #820000;
+  color: white;
+  border: none;
+  text-align: center;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background-color: #360060;
+  }
 `;
 
-const Author = styled.p`
-  color: #555;
-  font-style: italic;
-`;
+const AllBooks = () => {
+  const [books, setBooks] = useState([]);
 
-const Rating = styled.div`
-  font-weight: bold;
-  margin-top: 0.5rem;
-`;
+  useEffect(() => {
+    fetch('http://localhost:5500/api/books')
+      .then((res) => res.json())
+      .then((data) => setBooks(data))
+      .catch((err) => console.error('Error:', err));
+  }, []);
+
+  return (
+    <AllBooksWrapper>
+      {books.map((book) => (
+        <BookCard key={book._id}>
+          <BookImage src={book.imageUrl} alt={book.title} />
+          <h3>{book.title}</h3>
+          <p><strong>Author:</strong> {book.author}</p>
+          <p><strong>Genres:</strong> {book.genres?.join(', ')}</p>
+          <p><strong>Publish date:</strong> {new Date(book.publishDate).toLocaleDateString()}</p>
+          <p>{book.description.slice(0, 100)}...</p>
+          <ReadMoreButton to={`/books/${book._id}`}>Read More</ReadMoreButton> 
+        </BookCard>
+      ))}
+    </AllBooksWrapper>
+  );
+};
+
+export default AllBooks;

@@ -13,6 +13,7 @@ const App = () => {
   
   return (
     <>
+    <div className="app-container">
       <Header />
       <Routes path="/" element={<MainOutlet />}>
         <Route path="/" element={<Home />} />
@@ -21,7 +22,7 @@ const App = () => {
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
-    
+    </div>
     </>
   );
 };

@@ -4,7 +4,8 @@ import { Link } from 'react-router';
 const Footer = () => {
     return (
       <FooterWrapper>
-       <p>&copy; {new Date().getFullYear()} Book Library. All rights reserved. Seirijų g. 2, Alytus, Lithuania</p>
+       <p>&copy; {new Date().getFullYear()} Book Library. All rights reserved</p>
+       <p>Seirijų g. 2, Alytus, Lithuania</p>
       <LinkGroup>
         <Link to="/cookies">Cookies</Link>
         <Link to="/privacy">Privacy Policy</Link>
@@ -27,6 +28,7 @@ const Footer = () => {
   background-color: #111;
   color: white;
   text-align: center;
+  min-width: 300px;
 `;
 
   const LinkGroup = styled.div`

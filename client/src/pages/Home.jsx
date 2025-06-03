@@ -4,7 +4,8 @@ import styled from 'styled-components';
 const HomeWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100%;
+  min-width: 100%;
   background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/47/Kuncinas_2023b.jpg');
   background-size: cover;
   background-position: center;
@@ -12,8 +13,12 @@ const HomeWrapper = styled.div`
 
 const Content = styled.div`
   flex: 1;
+  color: #ffffff;
+  font-size: 1.2rem;
   padding: 2rem;
   display: flex;
+  margin-top: 0,1rem;
+  margin-bottom: 24rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -21,18 +26,12 @@ const Content = styled.div`
 
 const FilterForm = styled.form`
   display: flex;
-  gap: 1rem;
+  gap: 1,2rem;
   flex-wrap: wrap;
-  margin-top: 2rem;
+  margin-top: 1,2rem;
   justify-content: center;
 `;
 
-const Footer = styled.footer`
-  padding: 1rem;
-  background-color: #eee;
-  text-align: center;
-  margin-top: auto;
-`;
 
 const Home = () => {
   const [yearFrom, setYearFrom] = useState('');
@@ -60,7 +59,7 @@ const Home = () => {
     <HomeWrapper>
       <Content>
         <h1>Welcome to the Book Library</h1>
-        <p>Explore top-rated books and share your thoughts.</p>
+        <h2>Explore top-rated books and share your thoughts.</h2>
 
         <FilterForm onSubmit={handleFilter}>
           <label>

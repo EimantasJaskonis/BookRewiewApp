@@ -44,16 +44,18 @@ const BookDetails = () => {
 
 export default BookDetails;
 
-// Styled Components
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  padding: 2rem;
+  padding: 1rem;
+  min-height: 72vh;
+  max-height: 2000px;
 `;
 
 const Cover = styled.img`
   max-width: 300px;
+  max-height: 500px;
   border-radius: 1rem;
   object-fit: cover;
 `;
@@ -69,7 +71,7 @@ const Title = styled.h1`
 
 const Author = styled.h3`
   margin: 0.5rem 0;
-  color: #555;
+  color: #820000;
 `;
 
 const Genres = styled.div`
